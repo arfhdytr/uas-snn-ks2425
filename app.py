@@ -152,10 +152,10 @@ flowchart TD
     df_soal3 = pd.DataFrame({
         "Tahun": tahun,
         "PDB (Revaluasi)": pdb_rev,
-        "PDB (Deflasi Ganda)": pdb_def
+        "PDB (Deflasi)": pdb_def
     })
     
-    st.dataframe(df_soal3.style.format({"PDB (Revaluasi)": "{:.2f}", "PDB (Deflasi Ganda)": "{:.2f}"}), use_container_width=True)
+    st.dataframe(df_soal3.style.format({"PDB (Revaluasi)": "{:.2f}", "PDB (Deflasi)": "{:.2f}"}), use_container_width=True)
     
     st.warning("**Kesimpulan Perbandingan:** Pada metode deflasi ganda, Indeks Harga Konsumsi Antara (IHKa) naik secara lebih lambat (sebesar 15% dari 100 ke 115) bila dibandingkan dengan kenaikan harga Output (yang melonjak tajam 50% dari 4 ke 6). Dampaknya, persentase struktur biaya riil bahan baku akan tampak membengkak, sehingga menghimpit margin nilai tambah. Hal inilah yang menyebabkan pencatatan nilai PDB Riil secara deflasi menurun perlahan.")
 
