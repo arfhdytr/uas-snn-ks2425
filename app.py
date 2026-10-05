@@ -78,10 +78,10 @@ with st.expander("Soal 2: PDB Pendekatan Pengeluaran"):
     """)
 
 # SOAL 3
-with st.expander("Soal 3: Metode Revaluasi vs Deflasi Ganda"):
+with st.expander("Soal 3: Metode Revaluasi vs Deflasi"):
     st.markdown("""
     <div class="explanation">
-        <strong>Mengapa Harga Konstan?</strong> PDB Harga Berlaku akan membesar hanya karena barang menjadi lebih mahal (inflasi). Untuk melihat <strong>pertumbuhan riil fisik</strong>, kita harus mengunci harganya (Harga Konstan). Di bawah ini kita membandingkan dua metode pendekatan.
+        <strong>Mengapa Harga Konstan?</strong> PDB Harga Berlaku akan membesar hanya karena barang menjadi lebih mahal (inflasi). Untuk melihat <strong>pertumbuhan riil fisik</strong>, kita harus mengunci harganya (Harga Konstan). Di bawah ini kita membandingkan dua metode pendekatan sesuai materi kelas.
     </div>
     """, unsafe_allow_html=True)
     
@@ -90,7 +90,7 @@ with st.expander("Soal 3: Metode Revaluasi vs Deflasi Ganda"):
 ```mermaid
 flowchart TD
     A["Hitung PDB Konstan"] --> B["Metode Revaluasi"]
-    A --> C["Metode Deflasi Ganda"]
+    A --> C["Metode Deflasi"]
     
     B --> B1["Output Konstan = Qt × Harga Tahun Dasar"]
     B --> B2["IC Konstan = Rasio Tetap 50% dari Output Konstan"]
@@ -98,7 +98,7 @@ flowchart TD
     B2 --> B3
 
     C --> C1["Output Konstan = Output Berlaku / Indeks Harga Output"]
-    C --> C2["IC Konstan = IC Berlaku / Indeks Harga IC"]
+    C --> C2["IC Konstan = Rasio Tetap 50% dari Output Konstan"]
     C1 --> C3["NTB Konstan = Output - IC"]
     C2 --> C3
     
@@ -121,13 +121,13 @@ flowchart TD
 ```
         """)
     with col_def:
-        st.markdown("**Metode Deflasi Ganda**")
+        st.markdown("**Metode Deflasi**")
         st.markdown("""
 ```mermaid
 flowchart TD
     OutB["Output Berlaku = 1.917"] -->|"Dibagi Indeks 1,125"| OutK["Output Konstan = 1.704"]
-    ICB["IC Berlaku = 958,5"] -->|"Dibagi Indeks 1,05"| ICK["Konsumsi Antara = 912,86"]
-    OutK -->|"Dikurang Konsumsi Antara"| PDB["PDB Konstan Deflasi = 1.704 - 912,86 = 791,14"]
+    OutK -->|"Asumsi Rasio Tetap 50%"| ICK["Konsumsi Antara = 852"]
+    OutK -->|"Dikurang Konsumsi Antara"| PDB["PDB Konstan Deflasi = 1.704 - 852 = 852"]
     ICK -->|"Pengurang"| PDB
 ```
         """)
@@ -135,18 +135,18 @@ flowchart TD
     tahun = [2020, 2021, 2022, 2023, 2024, 2025]
     qt = [400, 426, 450, 470, 480, 500]
     pt = [4, 4.5, 5, 5.3, 5.7, 6]
-    ihka = [100, 105, 107, 110, 113, 115]
     
+    # Kalkulasi Revaluasi
     out_rev = [q * 4 for q in qt]
     ic_rev = [0.5 * o for o in out_rev]
     pdb_rev = [o - i for o, i in zip(out_rev, ic_rev)]
     
+    # Kalkulasi Deflasi (Tunggal)
     out_adhb = [q * p for q, p in zip(qt, pt)]
-    ic_adhb = [0.5 * o for o in out_adhb]
     ih_out = [(p / 4) * 100 for p in pt]
     
     out_def = [o / (idx / 100) for o, idx in zip(out_adhb, ih_out)]
-    ic_def = [i / (idx / 100) for i, idx in zip(ic_adhb, ihka)]
+    ic_def = [0.5 * o for o in out_def]
     pdb_def = [o - i for o, i in zip(out_def, ic_def)]
     
     df_soal3 = pd.DataFrame({
@@ -157,7 +157,7 @@ flowchart TD
     
     st.dataframe(df_soal3.style.format({"PDB (Revaluasi)": "{:.2f}", "PDB (Deflasi)": "{:.2f}"}), use_container_width=True)
     
-    st.warning("**Kesimpulan Perbandingan:** Pada metode deflasi ganda, Indeks Harga Konsumsi Antara (IHKa) naik secara lebih lambat (sebesar 15% dari 100 ke 115) bila dibandingkan dengan kenaikan harga Output (yang melonjak tajam 50% dari 4 ke 6). Dampaknya, persentase struktur biaya riil bahan baku akan tampak membengkak, sehingga menghimpit margin nilai tambah. Hal inilah yang menyebabkan pencatatan nilai PDB Riil secara deflasi menurun perlahan.")
+    st.warning("**Kesimpulan Perbandingan:** Karena metode Deflasi (tunggal) tetap menggunakan asumsi rasio biaya bahan baku (Konsumsi Antara) yang konstan dari Output Konstan, maka hasil akhirnya secara matematis terbukti **sama persis** dengan metode Revaluasi. Berbeda halnya jika menggunakan metode *Double Deflasi*.")
 
 # SOAL 4
 with st.expander("Soal 4: Analisis PDB (Pertumbuhan, Kontribusi, Inflasi)"):
