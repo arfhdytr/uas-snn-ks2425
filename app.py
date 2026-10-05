@@ -36,28 +36,26 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ----------------- SIDEBAR NAVBAR -----------------
-st.sidebar.title("📚 Navigasi SNN")
-menu = st.sidebar.radio(
-    "Pilih Menu:",
-    ["Materi", "Soal 22/23", "Soal 23/24", "Soal 24/25"]
-)
+# ----------------- TOP NAVBAR (TABS) -----------------
+st.title("📚 Pembahasan & Materi SNN")
+
+tab_materi, tab_22, tab_23, tab_24 = st.tabs(["Materi", "Soal 22/23", "Soal 23/24", "Soal 24/25"])
 
 # ----------------- KONTEN MENU -----------------
-if menu == "Materi":
-    st.title("Materi Perkuliahan SNN")
+with tab_materi:
+    st.header("Materi Perkuliahan SNN")
     st.info("Menu ini masih kosong. Silakan kirimkan dokumen markdown lengkapnya terlebih dahulu.")
 
-elif menu == "Soal 22/23":
-    st.title("Pembahasan UAS SNN 2022/2023")
+with tab_22:
+    st.header("Pembahasan UAS SNN 2022/2023")
     st.info("Data pembahasan untuk tahun ajaran ini belum tersedia (kosong).")
 
-elif menu == "Soal 23/24":
-    st.title("Pembahasan UAS SNN 2023/2024")
+with tab_23:
+    st.header("Pembahasan UAS SNN 2023/2024")
     st.info("Data pembahasan untuk tahun ajaran ini belum tersedia (kosong).")
 
-elif menu == "Soal 24/25":
-    st.title("Pembahasan Lengkap & Visual - UAS SNN 24/25")
+with tab_24:
+    st.header("Pembahasan Lengkap & Visual - UAS SNN 24/25")
     st.caption("Program Diploma IV STIS - T.A. 2024/2025")
 
     # SOAL 1
