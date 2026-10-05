@@ -44,7 +44,148 @@ tab_materi, tab_22, tab_23, tab_24 = st.tabs(["Materi", "Soal 22/23", "Soal 23/2
 # ----------------- KONTEN MENU -----------------
 with tab_materi:
     st.header("Materi Perkuliahan SNN")
-    st.info("Menu ini masih kosong. Silakan kirimkan dokumen markdown lengkapnya terlebih dahulu.")
+    
+    st.markdown("""
+    <div class="explanation">
+        Materi ini dirangkum berdasarkan dokumen pembelajaran SNN, mencakup konsep dasar PDB, pendekatan perhitungannya, hingga metode analisis makroekonomi yang diturunkan dari data PDB/PDRB.
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.subheader("1. Konsep Penilaian PDB")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("""
+        <div class="stMetric">
+        <strong>PDB Atas Dasar Harga Berlaku (ADHB / Nominal)</strong><br>
+        Dihitung berdasarkan harga pasar aktual pada tahun berjalan.<br>
+        <ul>
+            <li>Menggambarkan struktur transaksi moneter riil.</li>
+            <li>Nilainya rentan mengalami distorsi oleh kenaikan harga (inflasi).</li>
+            <li><strong>Kegunaan:</strong> Analisis rasio keuangan makro (rasio pajak, defisit anggaran APBN terhadap PDB, dan daya serap investasi aktual).</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown("""
+        <div class="stMetric">
+        <strong>PDB Atas Dasar Harga Konstan (ADHK / Riil)</strong><br>
+        Dihitung dengan mengacu pada indeks harga tetap pada satu Tahun Dasar.<br>
+        <ul>
+            <li>Menghilangkan unsur perubahan harga pasar.</li>
+            <li>Murni mencerminkan peningkatan volume fisik produksi riil di lapangan.</li>
+            <li><strong>Kegunaan:</strong> Laju pertumbuhan ekonomi, efektivitas kebijakan fiskal, dan evaluasi produktivitas sektoral.</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.subheader("2. PDB Berdasarkan 3 Pendekatan")
+
+    tab_prod, tab_peng, tab_pend = st.tabs(["Pendekatan Produksi", "Pendekatan Pengeluaran", "Pendekatan Pendapatan"])
+
+    with tab_prod:
+        st.markdown("#### PDB Pendekatan Produksi")
+        st.write("PDB adalah penjumlahan nilai tambah atas barang dan jasa yang dihasilkan oleh berbagai unit produksi di wilayah suatu negara dalam jangka waktu tertentu.")
+        st.info("**Nilai Tambah Bruto (NTB)** = Output - Konsumsi Antara\n\n**PDB/PDRB** = Total NTB + Pajak Atas Produk - Subsidi Atas Produk")
+        
+        with st.expander("17 Kategori Lapangan Usaha (KBLI)"):
+            st.markdown("""
+            1. **A.** Pertanian, Kehutanan, dan Perikanan
+            2. **B.** Pertambangan dan Penggalian
+            3. **C.** Industri Pengolahan
+            4. **D.** Pengadaan Listrik dan Gas
+            5. **E.** Pengadaan Air, Pengelolaan Sampah, Limbah dan Remediasi
+            6. **F.** Konstruksi
+            7. **G.** Perdagangan Besar dan Eceran; Reparasi Mobil dan Sepeda Motor
+            8. **H.** Transportasi dan Pergudangan
+            9. **I.** Penyediaan Akomodasi dan Makan Minum
+            10. **J.** Informasi dan Komunikasi
+            11. **K.** Jasa Keuangan dan Asuransi
+            12. **L.** Real Estat
+            13. **M,N.** Jasa Perusahaan
+            14. **O.** Administrasi Pemerintahan, Pertahanan, dan Jaminan Sosial Wajib
+            15. **P.** Jasa Pendidikan
+            16. **Q.** Jasa Kesehatan dan Kegiatan Sosial
+            17. **R,S,T,U.** Jasa Lainnya
+            """)
+        st.warning("**Catatan Penting:**\n- PDB hanya menghitung nilai *final goods* (menghindari *double counting*), bukan *intermediate goods*.\n- PDB tidak menghitung transaksi *financial asset* (saham, obligasi).\n- PDB tidak menghitung penjualan barang bekas (hanya barang yang diproduksi saat ini).\n- Barang tanpa nilai pasar dihitung menggunakan nilai estimasi (*imputed value*).")
+
+    with tab_peng:
+        st.markdown("#### PDB Pendekatan Pengeluaran")
+        st.write("PDB adalah semua komponen permintaan akhir yang terdiri dari konsumsi, investasi, pengeluaran pemerintah, dan ekspor neto.")
+        st.info("**PDB = C + I + G + (X - M)**\n\n*(Konsumsi RT + Investasi/PMTB + Konsumsi Pemerintah + Ekspor Neto)*")
+        
+        with st.expander("1. Pengeluaran Konsumsi Rumah Tangga (PK-RT)"):
+            st.write("Pengeluaran rumah tangga untuk semua barang dan jasa (penggunaan akhir). Diklasifikasikan berdasarkan COICOP (12 divisi, spt makanan, pakaian, perumahan). Mencakup transaksi moneter (pembelian) dan non-moneter (barter, produksi dikonsumsi sendiri). Tidak termasuk pembelian aset rumah (masuk PMTB) dan barang berharga.")
+        with st.expander("2. Pengeluaran Konsumsi LNPRT"):
+            st.write("Lembaga Non-Profit yang Melayani Rumah Tangga (Ormas, Partai Politik, Lembaga Keagamaan, Serikat Buruh). Outputnya adalah output non-pasar, dihitung dari total biaya produksi = Biaya Antara + Kompensasi Pegawai + Penyusutan + Pajak.")
+        with st.expander("3. Pengeluaran Konsumsi Pemerintah (PK-P)"):
+            st.write("Biaya yang dikeluarkan pemerintah untuk menyediakan barang/jasa publik. Dibagi menjadi konsumsi kolektif (pertahanan/keamanan) dan individu (pendidikan/kesehatan).")
+        with st.expander("4. Pembentukan Modal Tetap Bruto (PMTB) / Investasi"):
+            st.write("Penambahan dikurangi pengurangan aset tetap (aset diproduksi dan digunakan berulang kali >1 tahun). Terdiri dari: Bangunan, Mesin, Kendaraan, *Cultivated Biological Resources* (tanaman/hewan jangka panjang), dan Produk Kekayaan Intelektual (software, eksplorasi mineral, *research & development*).")
+        with st.expander("5. Perubahan Inventori"):
+            st.write("Nilai produk yang masuk inventori dikurangi yang diambil dari inventori. Terdapat 5 jenis: Bahan baku/penolong, *Work in Progress* (barang setengah jadi), Barang jadi, Barang untuk dijual kembali, dan Inventori militer (amunisi).")
+        with st.expander("6. Ekspor Neto (Ekspor - Impor)"):
+            st.write("Transaksi alih kepemilikan ekonomi barang/jasa antara residen dan non-residen. Ekspor dinilai secara *f.o.b* (Free on Board) dan Impor dinilai *c.i.f* (Cost, Insurance, Freight). Termasuk aktivitas *merchanting* (beli dari luar negeri, dijual langsung ke luar negeri tanpa masuk wilayah domestik).")
+
+    with tab_pend:
+        st.markdown("#### PDB Pendekatan Pendapatan")
+        st.write("PDB merupakan penjumlahan balas jasa faktor-faktor produksi milik residen dan non-residen di wilayah domestik.")
+        st.info("**Pendapatan Nasional** = PDB Pendapatan - Net Factor Income (Pendapatan neto faktor produksi dari luar negeri)\n\n*(Pendapatan Nasional menghitung balas jasa milik warga negara sendiri baik di dalam maupun luar negeri).*")
+        st.markdown("**Komponen Balas Jasa (Neraca Pendapatan Yang Dihasilkan):**")
+        st.markdown("""
+        - **Kompensasi Pegawai:** Total pendapatan baik *cash* maupun *in-kind* (barang/jasa) yang dibayarkan ke karyawan.
+        - **Pajak Produksi & Impor (dikurangi Subsidi):** Pajak atas barang/jasa yang diproduksi (tidak termasuk PPN).
+        - **Konsumsi Modal Tetap (Penyusutan)**
+        - **Surplus Usaha Neto / Pendapatan Campuran:** Item penyeimbang (*balancing item*). Disebut *mixed income* (pendapatan campuran) untuk usaha rumah tangga tidak berbadan hukum, karena upah pemilik tidak bisa dibedakan dengan laba usaha.
+        """)
+
+    st.markdown("---")
+    st.subheader("3. Analisis PDB / PDRB")
+    
+    with st.expander("📈 1. Pertumbuhan Ekonomi & Indeks Implisit"):
+        st.markdown("""
+        - **Laju Pertumbuhan Ekonomi:** Dihitung dari **PDB ADH Konstan**. Menggambarkan kinerja/keberhasilan pembangunan fisik riil suatu daerah.
+          `Laju = ((PDB Riil_t - PDB Riil_t-1) / PDB Riil_t-1) * 100%`
+        - **Indeks Implisit (PDRB Deflator):** Rasio antara PDB Berlaku dan PDB Konstan. Berfungsi sebagai indikator tingkat inflasi (perubahan harga) untuk seluruh aktivitas perekonomian secara makro di tingkat produsen.
+          `Indeks Implisit = (PDB Nominal / PDB Riil) * 100`
+        """)
+
+    with st.expander("🥧 2. Struktur Ekonomi & Sumber Pertumbuhan"):
+        st.markdown("""
+        - **Struktur Ekonomi (Kontribusi):** Diperoleh dari proporsi lapangan usaha (Primer, Sekunder, Tersier) terhadap Total **PDB ADH Berlaku**. Berguna untuk melihat pergeseran struktur ekonomi (misal dari agraris ke industri).
+        - **Sumber Pertumbuhan Ekonomi (Source of Growth):** Seberapa besar sumbangan (share) suatu sektor dalam menciptakan total laju pertumbuhan ekonomi wilayah.
+          `SOG = (Δ PDB Konstan Sektor_i / Total PDB Konstan Tahun Sebelumnya) * 100%`
+        """)
+
+    with st.expander("📍 3. Location Quotient (LQ) & Shift Share"):
+        st.markdown("""
+        - **Location Quotient (LQ):** Menentukan derajat *self-sufficiency* dan kapasitas ekspor perekonomian daerah. 
+          - `LQ > 1`: Sektor **Basis**. Produksi lebih dari cukup untuk kebutuhan lokal, sehingga diekspor.
+          - `LQ <= 1`: Sektor **Non-Basis**. Belum mencukupi kebutuhan lokal, sehingga butuh pasokan/impor.
+        - **Analisis Shift Share (SS):** Menganalisis transformasi struktur ekonomi wilayah menjadi 3 komponen:
+          - *Regional Share (G):* Pengaruh pertumbuhan ekonomi nasional/acuan.
+          - *Proportional Shift (Pi):* Pengaruh struktur ekonomi daerah (spesialisasi sektor).
+          - *Differential Shift (Di):* Keunggulan kompetitif (daya saing spesifik) sektor lokal dibanding daerah acuan.
+        """)
+
+    with st.expander("📊 4. Tipologi Klassen & Indeks Williamson"):
+        st.markdown("""
+        - **Tipologi Klassen:** Klasifikasi daerah dalam 4 kuadran berdasarkan Laju Pertumbuhan dan PDRB Per Kapita dibanding daerah acuan (nasional):
+          1. **Kuadran I (Maju & Tumbuh Cepat):** Pertumbuhan > Acuan, Per kapita > Acuan.
+          2. **Kuadran II (Maju tapi Tertekan):** Pertumbuhan < Acuan, Per kapita > Acuan.
+          3. **Kuadran III (Sedang Berkembang):** Pertumbuhan > Acuan, Per kapita < Acuan.
+          4. **Kuadran IV (Relatif Tertinggal):** Pertumbuhan < Acuan, Per kapita < Acuan.
+        - **Indeks Williamson:** Mengetahui ketimpangan/kesenjangan distribusi pendapatan antar daerah. Nilai mendekati 1 berarti kesenjangan ekonomi tinggi, nilai mendekati 0 berarti pemerataan ekonomi tinggi.
+        """)
+
+    with st.expander("⚙️ 5. Analisis Makro Lainnya (ICOR, Elastisitas TK, MPC, PDRB Perkapita)"):
+        st.markdown("""
+        - **PDRB Per Kapita:** `PDRB / Total Penduduk`. Digunakan untuk mengetahui tingkat kesejahteraan dan produktivitas masyarakat suatu daerah secara umum.
+        - **ICOR (Incremental Capital Output Ratio):** `ΔInvestasi / ΔOutput`. Menunjukkan efisiensi investasi. Angka ICOR yang rendah berarti ekonomi berjalan efisien (butuh suntikan modal lebih sedikit untuk menghasilkan 1 unit output).
+        - **Elastisitas Tenaga Kerja:** `%ΔTenaga Kerja / %ΔOutput`. Menunjukkan seberapa padat karya pertumbuhan ekonomi tersebut. Angka elastisitas tinggi (mendekati 1) berarti padat karya (*labor-intensive*), angka rendah berarti padat modal/mesin (*capital-intensive*).
+        - **MPC (Marginal Propensity to Consume):** Bagian dari tambahan pendapatan yang dialokasikan untuk konsumsi. Jika pendapatan meningkat (PDB naik), biasanya porsi konsumsi menurun (MPC < 1) dan dialihkan ke tabungan/investasi.
+        """)
 
 with tab_22:
     st.header("Pembahasan UAS SNN 2022/2023")
