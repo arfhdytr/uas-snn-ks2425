@@ -146,54 +146,218 @@ with tab_materi:
     with st.expander("📈 1. Pertumbuhan Ekonomi & Indeks Implisit"):
         st.markdown("""
         - **Laju Pertumbuhan Ekonomi:** Dihitung dari **PDB ADH Konstan**. Menggambarkan kinerja/keberhasilan pembangunan fisik riil suatu daerah.
-          `Laju = ((PDB Riil_t - PDB Riil_t-1) / PDB Riil_t-1) * 100%`
-        - **Indeks Implisit (PDRB Deflator):** Rasio antara PDB Berlaku dan PDB Konstan. Berfungsi sebagai indikator tingkat inflasi (perubahan harga) untuk seluruh aktivitas perekonomian secara makro di tingkat produsen.
-          `Indeks Implisit = (PDB Nominal / PDB Riil) * 100`
+          $$r = \\frac{Y_t - Y_{t-1}}{Y_{t-1}} \\times 100\\%$$
+          *(Keterangan: $Y_t$ = PDB ADHK periode ke-t)*
+        - **Indeks Implisit (PDRB Deflator):** Rasio antara PDB Berlaku dan PDB Konstan. Berfungsi sebagai indikator tingkat inflasi (perubahan harga).
+          $$I_t = \\frac{X_{it}}{Y_{it}} \\times 100$$
+          *(Keterangan: $X_{it}$ = PDB ADHB, $Y_{it}$ = PDB ADHK)*
+        - **Laju Indeks Implisit:**
+          $$\\Delta I_t = \\left( \\frac{I_t}{I_{t-1}} \\times 100\\% \\right) - 100\\%$$
         """)
 
     with st.expander("🥧 2. Struktur Ekonomi & Sumber Pertumbuhan"):
         st.markdown("""
-        - **Struktur Ekonomi (Kontribusi):** Diperoleh dari proporsi lapangan usaha (Primer, Sekunder, Tersier) terhadap Total **PDB ADH Berlaku**. Berguna untuk melihat pergeseran struktur ekonomi (misal dari agraris ke industri).
-        - **Sumber Pertumbuhan Ekonomi (Source of Growth):** Seberapa besar sumbangan (share) suatu sektor dalam menciptakan total laju pertumbuhan ekonomi wilayah.
-          `SOG = (Δ PDB Konstan Sektor_i / Total PDB Konstan Tahun Sebelumnya) * 100%`
+        - **Struktur Ekonomi (Kontribusi):** Diperoleh dari proporsi lapangan usaha terhadap Total **PDB ADH Berlaku**.
+          $$\\text{Kontribusi Sektor}_i = \\frac{\\text{PDB ADHB}_i}{\\text{Total PDB ADHB}} \\times 100\\%$$
+        - **Sumber Pertumbuhan Ekonomi (Source of Growth):** Seberapa besar sumbangan suatu sektor dalam menciptakan total laju pertumbuhan ekonomi wilayah.
+          $$SOG_{it} = \\frac{y_{it} - y_{it-1}}{\\sum y_{it-1}} \\times 100\\%$$
+          *(Keterangan: $y_{it}$ = PDB ADHK sektor ke-i pada tahun ke-t, penyebut adalah Total PDB ADHK tahun sebelumnya)*
         """)
 
     with st.expander("📍 3. Location Quotient (LQ) & Shift Share"):
         st.markdown("""
         - **Location Quotient (LQ):** Menentukan derajat *self-sufficiency* dan kapasitas ekspor perekonomian daerah. 
-          - `LQ > 1`: Sektor **Basis**. Produksi lebih dari cukup untuk kebutuhan lokal, sehingga diekspor.
-          - `LQ <= 1`: Sektor **Non-Basis**. Belum mencukupi kebutuhan lokal, sehingga butuh pasokan/impor.
-        - **Analisis Shift Share (SS):** Menganalisis transformasi struktur ekonomi wilayah menjadi 3 komponen:
-          - *Regional Share (G):* Pengaruh pertumbuhan ekonomi nasional/acuan.
-          - *Proportional Shift (Pi):* Pengaruh struktur ekonomi daerah (spesialisasi sektor).
-          - *Differential Shift (Di):* Keunggulan kompetitif (daya saing spesifik) sektor lokal dibanding daerah acuan.
+          $$LQ = \\frac{v_i / v_t}{V_i / V_t}$$
+          *(Keterangan: $v_i$ = PDRB sektor $i$ daerah, $v_t$ = Total PDRB daerah, $V_i$ = PDB sektor $i$ nasional, $V_t$ = Total PDB nasional)*
+          - `LQ > 1`: Sektor **Basis** (mampu diekspor).
+          - `LQ <= 1`: Sektor **Non-Basis** (butuh impor).
+        - **Analisis Shift Share (SS):** Menganalisis transformasi struktur ekonomi wilayah.
+          $$\\Delta y_i = y_i^0 \\left(\\frac{Y^t}{Y^0} - 1\\right) + y_i^0 \\left(\\frac{Y_i^t}{Y_i^0} - \\frac{Y^t}{Y^0}\\right) + y_i^0 \\left(\\frac{y_i^t}{y_i^0} - \\frac{Y_i^t}{Y_i^0}\\right)$$
+          *(Suku 1 = Regional Share, Suku 2 = Proportional Shift, Suku 3 = Differential Shift)*
         """)
 
     with st.expander("📊 4. Tipologi Klassen & Indeks Williamson"):
         st.markdown("""
-        - **Tipologi Klassen:** Klasifikasi daerah dalam 4 kuadran berdasarkan Laju Pertumbuhan dan PDRB Per Kapita dibanding daerah acuan (nasional):
-          1. **Kuadran I (Maju & Tumbuh Cepat):** Pertumbuhan > Acuan, Per kapita > Acuan.
-          2. **Kuadran II (Maju tapi Tertekan):** Pertumbuhan < Acuan, Per kapita > Acuan.
-          3. **Kuadran III (Sedang Berkembang):** Pertumbuhan > Acuan, Per kapita < Acuan.
-          4. **Kuadran IV (Relatif Tertinggal):** Pertumbuhan < Acuan, Per kapita < Acuan.
-        - **Indeks Williamson:** Mengetahui ketimpangan/kesenjangan distribusi pendapatan antar daerah. Nilai mendekati 1 berarti kesenjangan ekonomi tinggi, nilai mendekati 0 berarti pemerataan ekonomi tinggi.
+        - **Tipologi Klassen:** Klasifikasi daerah dalam 4 kuadran berdasarkan Laju Pertumbuhan dan PDRB Per Kapita dibanding daerah acuan (nasional).
+        - **Indeks Williamson:** Mengetahui ketimpangan/kesenjangan distribusi pendapatan antar daerah.
+          $$I_w = \\frac{\\sqrt{\\sum (y_i - \\bar{y})^2 (f_i/n)}}{\\bar{y}}$$
+          *(Keterangan: $y_i$ = PDRB perkapita daerah i, $\\bar{y}$ = PDRB perkapita semua daerah, $f_i$ = penduduk daerah i, $n$ = total penduduk)*
+        - **Indeks Bonet:**
+          $$IB_i = \\frac{\\text{PDRB perkapita}_i}{\\text{PDRB perkapita}_{reference}} - 1$$
         """)
 
     with st.expander("⚙️ 5. Analisis Makro Lainnya (ICOR, Elastisitas TK, MPC, PDRB Perkapita)"):
         st.markdown("""
-        - **PDRB Per Kapita:** `PDRB / Total Penduduk`. Digunakan untuk mengetahui tingkat kesejahteraan dan produktivitas masyarakat suatu daerah secara umum.
-        - **ICOR (Incremental Capital Output Ratio):** `ΔInvestasi / ΔOutput`. Menunjukkan efisiensi investasi. Angka ICOR yang rendah berarti ekonomi berjalan efisien (butuh suntikan modal lebih sedikit untuk menghasilkan 1 unit output).
-        - **Elastisitas Tenaga Kerja:** `%ΔTenaga Kerja / %ΔOutput`. Menunjukkan seberapa padat karya pertumbuhan ekonomi tersebut. Angka elastisitas tinggi (mendekati 1) berarti padat karya (*labor-intensive*), angka rendah berarti padat modal/mesin (*capital-intensive*).
-        - **MPC (Marginal Propensity to Consume):** Bagian dari tambahan pendapatan yang dialokasikan untuk konsumsi. Jika pendapatan meningkat (PDB naik), biasanya porsi konsumsi menurun (MPC < 1) dan dialihkan ke tabungan/investasi.
+        - **PDRB Per Kapita:** Indikator dasar kesejahteraan dan produktivitas masyarakat.
+          $$\\text{PDRB Per Kapita} = \\frac{\\text{PDRB}}{\\text{Total Penduduk}}$$
+        - **ICOR (Incremental Capital Output Ratio):** Menunjukkan efisiensi investasi.
+          $$ICOR = \\frac{\\Delta I}{\\Delta Y}$$
+        - **Elastisitas Tenaga Kerja:** Menunjukkan seberapa padat karya pertumbuhan ekonomi.
+          $$E_{TK} = \\frac{\\Delta TK / TK}{\\Delta Y / Y}$$
+        - **MPC (Marginal Propensity to Consume):** Bagian dari tambahan pendapatan yang dialokasikan untuk konsumsi.
+          $$MPC = \\frac{\\Delta C}{\\Delta Y_d}$$
+        - **APC (Average Propensity to Consume):** Bagian dari pendapatan yang dialokasikan untuk konsumsi.
+          $$APC = \\frac{C}{Y_d}$$
         """)
 
 with tab_22:
     st.header("Pembahasan UAS SNN 2022/2023")
-    st.info("Data pembahasan untuk tahun ajaran ini belum tersedia (kosong).")
+    
+    with st.expander("Soal 1: Konsep & Analisis PDB", expanded=True):
+        st.markdown("""
+        **Pertanyaan:**
+        a. Jelaskan mengapa PDB disajikan dalam atas dasar harga konstan dan atas dasar harga berlaku?
+        b. Jelaskan bagaimana PDB dapat digunakan untuk menganalisis perbandingan antar wilayah.
+        c. Jelaskan bagaimana PDB dapat digunakan untuk menganalisis perekonomian antar waktu dan antar komponen penyusunnya.
+
+        **Pembahasan:**
+        a. **PDB ADHB** (Harga Berlaku) digunakan untuk melihat pergeseran dan struktur ekonomi, sedangkan **PDB ADHK** (Harga Konstan) digunakan untuk mengetahui pertumbuhan ekonomi riil dari tahun ke tahun karena sudah bebas dari efek inflasi.
+        b. **Analisis Antar Wilayah:** Dapat dilakukan dengan membandingkan nilai PDB (menunjukkan kapasitas ekonomi), PDB per kapita (tingkat kesejahteraan), laju pertumbuhan (potensi masa depan), Indeks Williamson/Bonet (kesenjangan), *Location Quotient* (sektor basis), dan Tipologi Klassen.
+        c. **Analisis Antar Waktu & Komponen:** Dapat dilakukan dengan membandingkan nilai PDB dan per kapita dari tahun ke tahun untuk melihat laju pertumbuhan ekonomi. Selain itu, melihat sektor/lapangan usaha mana yang memiliki kontribusi (struktur) terbesar pada suatu titik waktu, dan bagaimana perubahannya seiring waktu.
+        """)
+
+    with st.expander("Soal 2: PDB Penggunaan & Diskrepansi"):
+        st.markdown("""
+        **Data PDB Penggunaan (Miliar Rp):**
+        | Komponen | 2018 | 2019 |
+        |---|---|---|
+        | PK-RT | 8.274.214 | 8.965.837 |
+        | PK-LNPRT | 180.893 | 206.094 |
+        | PK-P | 1.338.639 | 1.394.615 |
+        | PMTB | 4.791.211 | 5.121.371 |
+        | Perubahan Inventori | 338.634 | 226.923 |
+        | Ekspor | 3.116.546 | 2.943.533 |
+        | Impor (pengurang) | 3.275.145 | 3.013.944 |
+        | Diskrepansi Statistik | 73.764 | -11.773 |
+        | **PDB** | **14.838.756** | **15.832.657** |
+
+        **Pembahasan:**
+        a. **Proporsi Penggunaan:** Proporsi mirip antara 2018 dan 2019. Penggunaan terbesar adalah PK-RT (tumbuh 8,36% di 2019). Terbesar kedua adalah PMTB (tumbuh 6,89%). PK-LNPRT mengalami pertumbuhan tertinggi (13,93%).
+        b. **Diskrepansi Statistik:** Muncul karena adanya perbedaan metode, sumber data, dan waktu pencatatan antara perhitungan PDB pendekatan lapangan usaha dan PDB pendekatan pengeluaran yang seharusnya bernilai sama secara teoritis.
+        c. **Elastisitas Konsumsi RT:** 
+           - % Pertumbuhan PK-RT = 8,36%
+           - % Pertumbuhan PDB (Pendapatan) = ((15.832.657 - 14.838.756) / 14.838.756) * 100% = 6,69%
+           - Elastisitas = 8,36 / 6,69 = **1,25**
+           *Interpretasi:* Tiap kenaikan PDB sebesar 1% akan meningkatkan pengeluaran konsumsi RT sebesar 1,25%.
+        """)
+
+    with st.expander("Soal 3: NTB Kedelai (ADHB & ADHK)"):
+        st.markdown("""
+        **Data Produksi Kedelai Negara Metapesta:**
+        - **2017:** 70.000 ton, Harga Rp14.200/kg
+        - **2018:** 85.000 ton, Harga Rp14.800/kg
+        - **2019:** 92.000 ton, Harga Rp15.500/kg
+        *(Rasio Biaya Antara 2017 & 2018 = 0,02; 2019 = 0,03)*
+
+        **Pembahasan a. NTB ADHB (Harga Berlaku):**
+        - **2017:** (70.000 * 14.200) - (0,02 * 70.000 * 14.200) = **Rp974.120.000**
+        - **2018:** (85.000 * 14.800) - (0,02 * 85.000 * 14.800) = **Rp1.232.840.000**
+        - **2019:** (92.000 * 15.500) - (0,03 * 92.000 * 15.500) = **Rp1.383.220.000**
+
+        **Pembahasan b. NTB ADHK 2010 untuk 2017-2019:**
+        *(Diasumsikan harga konstan 2010 sama dengan harga 2017 yaitu 14.200)*
+        - **2017:** = **Rp974.120.000**
+        - **2018:** (85.000 * 14.200) - (0,02 * 85.000 * 14.200) = **Rp1.182.860.000**
+        - **2019:** (92.000 * 14.200) - (0,03 * 92.000 * 14.200) = **Rp1.267.208.000**
+
+        **Pembahasan c. NTB ADHK 2020-2022 (Rasio biaya antara 0,03):**
+        - Indeks Produksi (2010=100): 2020=220, 2021=235, 2022=252. Indeks Harga: 160, 172, 186.
+        - **2020:** Produksi = 220.000, Harga = 22.720, Output = 4.998.400.000, NTB = **4.848.448.000**
+        - **2021:** Produksi = 235.000, Harga = 24.424, Output = 5.739.640.000, NTB = **5.567.450.800**
+        - **2022:** Produksi = 252.000, Harga = 26.412, Output = 6.655.824.000, NTB = **6.456.149.280**
+        """)
+
+    with st.expander("Soal 4: Analisis PDRB Provinsi Z"):
+        st.markdown("""
+        **Pertanyaan & Pembahasan:**
+        a. **Indeks implisit konstruksi 2011=105, 2022=147. Artinya?**
+           Terjadi kenaikan harga barang/jasa di tingkat produsen sektor konstruksi sebesar 5% pada tahun 2011, dan naik 47% pada tahun 2022 (keduanya dibandingkan tahun dasar 2010).
+        
+        b. **Sektor laju indeks implisit tertinggi di 2022?**
+           Jasa Keuangan dan Asuransi (8,974%).
+        
+        c. **Bandingkan struktur ekonomi 2011 dan 2022.**
+           Sektor unggulan tetap Industri Pengolahan. Namun kontribusinya menurun dari 14,4% di 2011 menjadi 11,9% di 2022 (turun 2,478%).
+           
+        d. **Bandingkan laju pertumbuhan Akomodasi Makan Minum dgn laju ekonomi Provinsi 2022.**
+           - LPE Akomodasi = ((1638 - 1369)/1369) * 100% = **19,65%**
+           - LPE Provinsi Z = ((16569 - 14937)/14937) * 100% = **10,92%**
+           *Artinya:* Sektor akomodasi tumbuh jauh lebih cepat dibandingkan rata-rata perekonomian provinsi secara keseluruhan.
+        """)
 
 with tab_23:
     st.header("Pembahasan UAS SNN 2023/2024")
-    st.info("Data pembahasan untuk tahun ajaran ini belum tersedia (kosong).")
+    
+    with st.expander("Soal 1-4: Konsep Dasar PDB", expanded=True):
+        st.markdown("""
+        **1. Pendekatan Produksi & Alasan BPS Tidak Menggunakan Total Output**
+        Pendekatan Produksi menjumlahkan Nilai Tambah Bruto (NTB) dari seluruh sektor. Total output tidak digunakan karena mengandung duplikasi (*double counting*), di mana produk suatu sektor menjadi input bagi sektor lain.
+        
+        **2. Komponen PDB Pengeluaran**
+        $Y = C + I + G + (X - M)$. Terdiri dari Konsumsi Rumah Tangga (C), Pembentukan Modal Tetap Bruto/Investasi (I), Konsumsi Pemerintah (G), dan Ekspor Neto (X-M).
+        
+        **3. Pendekatan Pendapatan & Alasan BPS Tidak Menggunakannya**
+        Menjumlahkan balas jasa faktor produksi (Upah, Sewa, Bunga, Laba, Pajak Neto). BPS tidak merilisnya sebagai PDB utama karena data tidak lengkap/akurat, banyak pendapatan non-moneter, dan risiko duplikasi sumber data.
+        
+        **4. Metode Harga Berlaku & 4 Metode Harga Konstan**
+        Harga berlaku menggunakan harga tahun berjalan. Harga konstan menggunakan harga tahun dasar. 4 Metode Harga Konstan: 
+        - Revaluasi
+        - Ekstrapolasi
+        - Deflasi Langsung (*Direct Deflation*)
+        - Deflasi Ganda (*Double Deflation*)
+        """)
+
+    with st.expander("Soal 5: Analisis Fluktuasi Ekonomi"):
+        st.markdown("""
+        **a. Interpretasi Grafik LPE (Fluktuatif):**
+        Pertumbuhan ekonomi belum stabil dan rentan tekanan eksternal/internal. Ekonomi tumbuh pesat di 2018, melambat drastis di 2020 akibat COVID-19, pulih di 2022, namun kembali terkontraksi di 2023.
+        
+        **b. Makna (1) Kenaikan Indeks Implisit, (2) Kenaikan SOG Industri Pengolahan:**
+        1) Kenaikan Indeks Implisit menunjukkan terjadinya inflasi/kenaikan harga di tingkat produsen. Jika naik tajam, PDB Nominal membesar karena harga, bukan karena volume riil.
+        2) Kenaikan SOG Industri Pengolahan menunjukkan sektor ini menjadi kontributor (motor pendorong) utama terhadap total persentase laju pertumbuhan ekonomi wilayah.
+        """)
+
+    with st.expander("Soal 6: Location Quotient (LQ) Kab. Berau"):
+        st.markdown("""
+        Data PDRB ADHK 2022 Provinsi Kaltim dan Kab. Berau.
+        $$LQ = \\frac{\\text{PDRB Sektor } i \\text{ Berau} / \\text{Total PDRB Berau}}{\\text{PDRB Sektor } i \\text{ Kaltim} / \\text{Total PDRB Kaltim}}$$
+        
+        **Hasil LQ Sektor Berau:**
+        - Pertanian = 1,38 (Basis)
+        - Pertambangan = 1,36 (Basis)
+        - Industri Pengolahan = 0,20 (Non-Basis)
+        - Pengadaan Listrik = 0,43 (Non-Basis)
+        *(Sektor yang memiliki LQ > 1 ditetapkan sebagai sektor Basis).*
+        
+        **Interpretasi:**
+        Sektor basis (LQ > 1) seperti Pertanian dan Pertambangan mampu memenuhi kebutuhan lokal dan diekspor. Kabupaten Berau sangat bergantung pada sektor primer. Sementara sektor sekunder seperti Industri Pengolahan sangat lemah (LQ=0,20), yang mengindikasikan perlunya penguatan hilirisasi industri.
+        """)
+
+    with st.expander("Soal 7: Inazuma (APC, MPS, ICOR)"):
+        st.markdown("""
+        **Data Inazuma 2022-2023 (Miliar):**
+        - PDRB 2022 = 1200 M, 2023 = 1320 M (Tumbuh 10%)
+        - PK-P 2022 = 450 M, 2023 = 499,5 M (Naik 11%)
+        - PMTB 2022 = 150 M, 2023 = 136 M
+        - APC RT 2022 = 0,5
+        - MPC RT 2023 = 0,7
+        
+        **a. Melengkapi Tabel PDRB Penggunaan:**
+        - PK-RT 2022 = APC * PDRB = 0,5 * 1200 = 600 M
+        - PK-RT 2023 = PK-RT 2022 + MPC * (PDRB 2023 - PDRB 2022) = 600 + 0,7*(120) = 684 M
+        
+        **b. APC 2023:**
+        $$APC = \\frac{C}{Y} = \\frac{684}{1320} = 0,518$$
+        *Artinya, di tahun 2023, masyarakat Inazuma menghabiskan sekitar 51,8% pendapatannya untuk konsumsi.*
+        
+        **c. MPS 2023:**
+        $$MPS = 1 - MPC = 1 - 0,7 = 0,3$$
+        *Artinya, setiap tambahan pendapatan Inazuma di 2023, 30% di antaranya dialokasikan untuk tabungan.*
+        
+        **d. ICOR 2023:**
+        $$ICOR = \\frac{I_t}{\\Delta Y} = \\frac{PMTB_{2023}}{PDRB_{2023} - PDRB_{2022}} = \\frac{136}{120} = 1,133$$
+        *Artinya, dibutuhkan tambahan investasi sebesar 1,133 miliar untuk menghasilkan tambahan output sebesar 1 miliar.*
+        """)
 
 with tab_24:
     st.header("Pembahasan Lengkap & Visual - UAS SNN 24/25")
