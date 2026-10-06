@@ -33,15 +33,227 @@ st.markdown("""
         color: #0f172a;
         margin-bottom: 1.5rem;
     }
+    .formula-card {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .formula-title {
+        color: #0f172a;
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 0.5rem;
+    }
+    .formula-interpret {
+        color: #475569;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-top: 0.75rem;
+        background-color: #f8fafc;
+        padding: 0.75rem;
+        border-radius: 6px;
+        border-left: 3px solid #cbd5e1;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # ----------------- TOP NAVBAR (TABS) -----------------
 st.title("📚 Pembahasan & Materi SNN")
 
-tab_materi, tab_22, tab_23, tab_24 = st.tabs(["Materi", "Soal 22/23", "Soal 23/24", "Soal 24/25"])
+tab_materi, tab_rumus, tab_22, tab_23, tab_24 = st.tabs(["Materi", "Rumus", "Soal 22/23", "Soal 23/24", "Soal 24/25"])
 
 # ----------------- KONTEN MENU -----------------
+with tab_rumus:
+    st.header("🧮 Kumpulan Rumus & Interpretasi")
+    st.markdown("""
+    <div class="explanation">
+        Daftar seluruh rumus penting beserta interpretasinya berdasarkan materi <strong>SNN 8-14</strong>. 
+        Tampilan dirancang responsif agar dapat dibaca dengan jelas di perangkat mobile.
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.subheader("1. Kinerja Ekonomi & Makroekonomi Dasar")
+    r_col1, r_col2 = st.columns(2)
+    
+    with r_col1:
+        st.markdown("""
+        <div class="formula-card">
+            <div class="formula-title">Laju Pertumbuhan Ekonomi (r)</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ r = \\frac{Y_t - Y_{t-1}}{Y_{t-1}} \\times 100\\% $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Menggambarkan tingkat keberhasilan pembangunan atau kinerja ekonomi suatu daerah secara volume fisik. Dihitung dari PDRB ADH Konstan.
+            </div>
+        </div>
+
+        <div class="formula-card">
+            <div class="formula-title">Laju Indeks Implisit</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ \\Delta I_t = \\left(\\frac{I_t}{I_{t-1}} \\times 100\\%\\right) - 100\\% $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Laju inflasi PDB makro dari tahun ke tahun.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with r_col2:
+        st.markdown("""
+        <div class="formula-card">
+            <div class="formula-title">Indeks Implisit (PDRB Deflator)</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ I_t = \\frac{X_{it}}{Y_{it}} \\times 100 $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Menggambarkan perubahan harga agregat (inflasi) di tingkat produsen. $X_{it}$ = PDB ADHB, $Y_{it}$ = PDB ADHK.
+            </div>
+        </div>
+
+        <div class="formula-card">
+            <div class="formula-title">PDRB Per Kapita</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ \\text{PDRB Per Kapita} = \\frac{\\text{PDRB}}{\\text{Total Penduduk}} $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Indikator rata-rata tingkat kesejahteraan dan produktivitas masyarakat suatu wilayah secara umum.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.subheader("2. Analisis Struktur & Kesenjangan Wilayah")
+    r_col3, r_col4 = st.columns(2)
+    
+    with r_col3:
+        st.markdown("""
+        <div class="formula-card">
+            <div class="formula-title">Source of Growth (SOG)</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ SOG_{it} = \\frac{y_{it} - y_{it-1}}{\\sum y_{it-1}} \\times 100\\% $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Seberapa besar sumbangsih (kontribusi) suatu sektor dalam menciptakan total laju pertumbuhan ekonomi wilayah.
+            </div>
+        </div>
+
+        <div class="formula-card">
+            <div class="formula-title">Shift Share (SS)</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ \\Delta y_i = y_i^0 \\left(\\frac{Y^t}{Y^0} - 1\\right) + y_i^0 \\left(\\frac{Y_i^t}{Y_i^0} - \\frac{Y^t}{Y^0}\\right) + y_i^0 \\left(\\frac{y_i^t}{y_i^0} - \\frac{Y_i^t}{Y_i^0}\\right) $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Menganalisis transformasi struktur ekonomi wilayah yang terbagi menjadi 3 komponen: Regional Share, Proportional Shift, dan Differential Shift.
+            </div>
+        </div>
+        
+        <div class="formula-card">
+            <div class="formula-title">Indeks Bonet</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ IB_i = \\frac{\\text{PDRB perkapita}_i}{\\text{PDRB perkapita}_{reference}} - 1 $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Perbandingan PDRB per kapita suatu daerah terhadap PDRB per kapita wilayah acuan atau nasional.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with r_col4:
+        st.markdown("""
+        <div class="formula-card">
+            <div class="formula-title">Location Quotient (LQ)</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ LQ = \\frac{v_i / v_t}{V_i / V_t} $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Menentukan kapasitas ekspor perekonomian daerah dan derajat <em>self-sufficiency</em>. LQ > 1 berarti sektor basis yang mampu mengekspor ke luar wilayah.
+            </div>
+        </div>
+
+        <div class="formula-card">
+            <div class="formula-title">Indeks Williamson</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ I_w = \\frac{\\sqrt{\\sum (y_i - \\bar{y})^2 (f_i/n)}}{\\bar{y}} $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Mengukur tingkat ketimpangan atau kesenjangan distribusi pendapatan antar daerah. Nilai mendekati 1 berarti ketimpangan tinggi.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.subheader("3. Investasi, Tenaga Kerja, dan Konsumsi")
+    r_col5, r_col6 = st.columns(2)
+    
+    with r_col5:
+        st.markdown("""
+        <div class="formula-card">
+            <div class="formula-title">ICOR (Incremental Capital Output Ratio)</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ ICOR = \\frac{\\Delta I}{\\Delta Y} $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Menunjukkan efisiensi investasi. Angka ICOR yang rendah berarti investasi sangat efisien; dibutuhkan modal lebih sedikit untuk menghasilkan tambahan 1 unit output.
+            </div>
+        </div>
+
+        <div class="formula-card">
+            <div class="formula-title">Marginal & Average Propensity to Consume</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ MPC = \\frac{\\Delta C}{\\Delta Y_d}, \\quad APC = \\frac{C}{Y_d} $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Bagian pendapatan (APC) dan bagian tambahan pendapatan (MPC) yang dialokasikan khusus untuk pengeluaran konsumsi masyarakat.
+            </div>
+        </div>
+        
+        <div class="formula-card">
+            <div class="formula-title">Perubahan Inventori (Metode Revaluasi)</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ \\text{Perubahan Inventori} = P \\times (q_t - q_{t-1}) $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Mengukur nilai produk yang masuk inventori dikurangi nilai yang keluar, dinilai dengan harga rata-rata berjalan ($P$).
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with r_col6:
+        st.markdown("""
+        <div class="formula-card">
+            <div class="formula-title">ILOR & Elastisitas Tenaga Kerja (E_TK)</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ ILOR = \\frac{\\Delta TK}{\\Delta Y}, \\quad E_{TK} = \\frac{\\Delta TK / TK}{\\Delta Y / Y} $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Menunjukkan kemampuan ekonomi dalam menyerap tenaga kerja. Elastisitas tinggi menunjukkan bahwa pertumbuhan ekonomi bersifat padat karya (<em>labor-intensive</em>).
+            </div>
+        </div>
+
+        <div class="formula-card">
+            <div class="formula-title">Tax Ratio</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ \\text{Tax Ratio} = \\frac{\\text{Pajak} \\times 100\\%}{\\text{PDB}} $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Menunjukkan perbandingan besarnya agregat pajak yang diterima oleh suatu wilayah dengan total PDB/PDRB-nya.
+            </div>
+        </div>
+
+        <div class="formula-card">
+            <div class="formula-title">Rasio Perdagangan Internasional (RPI)</div>
+            <div style="text-align: center; margin: 1rem 0; overflow-x: auto; font-size: 1.1rem;">
+                $$ RPI = \\frac{X - M}{X + M} $$
+            </div>
+            <div class="formula-interpret">
+                <strong>Interpretasi:</strong> Mengukur dominasi neraca perdagangan. Nilai berkisar antara -1 hingga 1. Jika negatif berarti didominasi impor, jika positif didominasi ekspor.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
 with tab_materi:
     st.header("Materi Perkuliahan SNN")
     
